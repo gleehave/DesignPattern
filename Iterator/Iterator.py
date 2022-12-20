@@ -6,7 +6,7 @@ class AlphabeticalOrderIterator(Iterator):
     _position: int = None
     _reverse: bool = False
 
-    def __init__(self, collection: WordsCollection, reverse: bool = False):
+    def __init__(self, collection: WordsCollection, reverse: bool = False) -> None:
         self._collection = collection
         self._reverse = reverse
         self._position = -1 if reverse else 0
@@ -20,14 +20,15 @@ class AlphabeticalOrderIterator(Iterator):
 
         return value
 
-class WordsCollection(Iterator):
-    def __init__(self, collection: List[Any]):
+
+class WordsCollection(Iterable):
+    def __init__(self, collection: List[Any] = []):
         self._collection = collection
 
-    def __iter__(self):
+    def __iter__(self) -> AlphabeticalOrderIterator:
         return AlphabeticalOrderIterator(self._collection)
 
-    def get_reverse_iterator(self):
+    def get_reverse_iterator(self) -> AlphabeticalOrderIterator:
         return AlphabeticalOrderIterator(self._collection, True)
 
     def add_item(self, item: Any):
